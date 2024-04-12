@@ -1,0 +1,7 @@
+{
+  "name": "MarketList",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

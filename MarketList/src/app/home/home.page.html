@@ -1,0 +1,27 @@
+<!-- menu -->
+<ion-menu side="end" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu Content</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">Ya veremos que agregar aquí</ion-content>
+</ion-menu>
+<!-- header -->
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="tittleMarketList">MarketList</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding"> Aquí van todos los productos que se añadan mediante el fab. </ion-content>
+</div>
+<!-- fab -->
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button class="modalButton" (click)="abrirModal()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

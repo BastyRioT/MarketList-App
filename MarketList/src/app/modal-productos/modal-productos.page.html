@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="tittleModal">
+      Añadir producto
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-input class="inputProducto" label="Nombre del Producto" label-placement="floating" fill="outline"></ion-input>
+  <ion-input class="inputCantidad" label="Cantidad" label-placement="floating" fill="outline"></ion-input>
+  <ion-input class="inputUnidad" label="Unidad" label-placement="floating" fill="outline"></ion-input>
+  <ion-input class="inputCategoria" label="Categoria" label-placement="floating" fill="outline"></ion-input>
+</ion-content>
