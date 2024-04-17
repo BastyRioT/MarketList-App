@@ -3,22 +3,27 @@
 }
 
 .inputProducto {
-    width: auto;
-    margin: 20px;
+    width: 90%;
+    margin: 20px auto;
 }
 
 .inputCantidad {
-    width: 20vh;
-    margin: auto;
+    width: 90%;
+    margin: 20px auto;
 }
 
 .inputUnidad {
-    display: flex;
-    width: 20vh;
-    margin: auto;
+    width: 90%;
+    margin: 20px auto;
 }
 
 .inputCategoria {
-    width: auto;
-    margin: 20px;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.boton {
+    width: 50%;
+    margin: 20px auto;
+    display: flex;
 }

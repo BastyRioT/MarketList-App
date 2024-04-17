@@ -11,8 +11,23 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-input class="inputProducto" label="Nombre del Producto" label-placement="floating" fill="outline"></ion-input>
-  <ion-input class="inputCantidad" label="Cantidad" label-placement="floating" fill="outline"></ion-input>
-  <ion-input class="inputUnidad" label="Unidad" label-placement="floating" fill="outline"></ion-input>
-  <ion-input class="inputCategoria" label="Categoria" label-placement="floating" fill="outline"></ion-input>
+  <ion-input class="inputProducto" shape="round" label="Nombre del Producto" label-placement="floating"
+    fill="outline"></ion-input>
+  <div class="input-container">
+    <ion-input class="inputCantidad" shape="round" label="Cantidad" label-placement="floating"
+      fill="outline"></ion-input>
+  </div>
+  <div class="inputCategoria">
+    <ion-select interface="popover" shape="round" label="Seleccionar Categoría" label-placement="floating"
+      fill="outline">
+      <ion-select-option value="verdura">Verdura</ion-select-option>
+      <ion-select-option value="fruta">Fruta</ion-select-option>
+      <ion-select-option value="carnes">Carnes</ion-select-option>
+      <ion-select-option value="lacteos">Lacteos</ion-select-option>
+      <ion-select-option value="dulces">Dulces</ion-select-option>
+      <ion-select-option value="liquidos">Liquidos</ion-select-option>
+    </ion-select>
+  </div>
+  <ion-button shape="round" color="success" class="boton">Agregar</ion-button>
+
 </ion-content>
