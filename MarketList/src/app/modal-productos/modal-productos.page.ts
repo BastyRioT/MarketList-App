@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-productos',
@@ -11,7 +11,8 @@ export class ModalProductosPage implements OnInit {
 
   nuevoProducto: string = '';
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private navController: NavController,
+    private toastController: ToastController) { }
 
   ngOnInit() {
   }
@@ -20,11 +21,19 @@ export class ModalProductosPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  agregarProducto() {
-    // Aquí puedes implementar la lógica para agregar el producto
-    // Por ejemplo, puedes emitir un evento o llamar a una función pasada como prop
-    if (this.nuevoProducto) {
-      this.modalController.dismiss(this.nuevoProducto);
-    }
+  async agregarProducto() {
+    // Mostrar el toast
+    const toast = await this.toastController.create({
+      message: 'Producto agregado correctamente',
+      duration: 1500, // Duración del toast en milisegundos
+      swipeGesture: 'vertical', // Deslizar hacia abajo para sacarlo
+      color: 'success', // Color del toast
+      animated: true, // Animacion
+      mode: 'ios', // ios o md el estilo del toast
+      position: 'bottom' // Posicion del Toast
+    });
+    toast.present();
+
+    this.modalController.dismiss();
   }
 }

@@ -1,20 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="tittleModal">
-      Añadir producto
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="cerrarModal()">
-        <ion-icon name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <div class="toolHeader">
+      <ion-title class="tittleModal">
+        Añadir producto
+      </ion-title>
+      <ion-buttons class="toolButton">
+        <ion-button (click)="cerrarModal()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </div>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <ion-input class="inputProducto" shape="round" label="Nombre del Producto" label-placement="floating"
     fill="outline"></ion-input>
   <div class="input-container">
-    <ion-input class="inputCantidad" shape="round" label="Cantidad" label-placement="floating"
+    <ion-input class="inputCantidad" type="number" shape="round" label="Cantidad" label-placement="floating"
       fill="outline"></ion-input>
   </div>
   <div class="inputCategoria">
@@ -26,8 +28,8 @@
       <ion-select-option value="lacteos">Lacteos</ion-select-option>
       <ion-select-option value="dulces">Dulces</ion-select-option>
       <ion-select-option value="liquidos">Liquidos</ion-select-option>
+      <ion-select-option value="otros">Otros</ion-select-option>
     </ion-select>
   </div>
-  <ion-button shape="round" color="success" class="boton">Agregar</ion-button>
-
+  <ion-button shape="round" class="boton" (click)="agregarProducto()">Agregar</ion-button>
 </ion-content>
