@@ -19,36 +19,70 @@ export class HomePage {
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string = '';
 
-  cancel() {
-    this.modal.dismiss(null, 'cancel');
-  }
+  items: any[] = [];
+  product = { name: '', quantity: '', category: '' };
 
-  confirm() {
-    this.modal.dismiss(null, 'confirm');
-  }
-
-  onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      this.message = `Hello, ${ev.detail.data}!`;
+  ngOnInit() {
+    // Cargar los datos del localStorage al iniciar la página
+    const savedItems = localStorage.getItem('items');
+    if (savedItems) {
+      this.items = JSON.parse(savedItems);
     }
   }
 
-  async agregarProducto() {
-    // Logica para que se agreguen los productos
-    // Mostrar el toast
-    const toast = await this.toastController.create({
-      message: 'Producto agregado correctamente',
-      duration: 1500, // Duración del toast en milisegundos
-      cssClass: 'toastProducto', // Nombre de la clase
-      swipeGesture: 'vertical', // Deslizar hacia abajo para sacarlo
-      color: 'success', // Color del toast
-      animated: true, // Animacion
-      mode: 'ios', // ios o md el estilo del toast
-      position: 'bottom' // Posicion del Toast
-    });
-    toast.present();
+  cancel() {
+    this.product = { name: '', quantity: '', category: '' };
+    this.modal.dismiss(null, 'cancel');
+  }
 
-    this.modalController.dismiss();
+  async addProducts() {
+    if (this.product.name && this.product.quantity && this.product.category) {
+      this.items.push({ ...this.product });
+      this.items.sort((a, b) => a.category.localeCompare(b.category)); //Ordenar categoria por letra
+      this.items.sort((a, b) => a.name.localeCompare(b.name));  //Ordenar nombre por letra
+      localStorage.setItem('items', JSON.stringify(this.items)); // Guardar los datos en localStorage
+      const toast = await this.toastController.create({
+        message: 'Producto agregado correctamente',
+        duration: 1500,
+        cssClass: 'toastProducto',
+        swipeGesture: 'vertical',
+        color: 'success',
+        animated: true,
+        mode: 'ios',
+        position: 'bottom'
+      });
+      toast.present();
+      this.product = { name: '', quantity: '', category: '' };
+      this.modalController.dismiss();
+    } else {
+      const toast = await this.toastController.create({
+        message: 'Por favor, rellene todos los campos',
+        duration: 1500,
+        color: 'danger',
+        position: 'bottom',
+        mode: 'ios',
+        swipeGesture: 'vertical',
+        animated: true
+      });
+      toast.present();
+    }
+  }
+
+  getCategorizedItems() {
+    const categorizedItems: { [key: string]: any[] } = {};
+    for (const item of this.items) {
+      if (!categorizedItems[item.category]) {
+        categorizedItems[item.category] = [];
+      }
+      categorizedItems[item.category].push(item);
+    }
+    return categorizedItems;
+  }
+
+  checkboxChanged(item: any) {
+    // función que maneja el cambio de checkbox
+    item.checked = !item.checked;
+    console.log('Checkbox changed:', item);
   }
 }
+

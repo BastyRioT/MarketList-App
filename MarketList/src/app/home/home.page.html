@@ -17,59 +17,44 @@
       <ion-title class="tittleMarketList">MarketList</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Contenido -->
   <ion-content class="ion-padding">
-
-
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Nombre del Producto</ion-card-title>
-        <ion-card-subtitle>Cantidad</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        Here's a small text description for the card content. Nothing more, nothing less.
-      </ion-card-content>
-    </ion-card>
-
-
+    <ng-container *ngFor="let category of getCategorizedItems() | keyvalue">
+      <h3>{{ category.key }}</h3> <!-- Nose si queda mejor dentro o fuera del card la categoria te lo dejo a tu criterio -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ category.key }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item-sliding *ngFor="let item of category.value">
+            <ion-item>
+              <ion-checkbox mode="ios" labelPlacement="end" [checked]="item.checked"
+                (ionChange)="checkboxChanged(item)">
+                <h2>{{ item.name }}</h2>
+                <p>Cantidad: {{ item.quantity }}</p>
+              </ion-checkbox>
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-item-option color="danger">Eliminar</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
   </ion-content>
 </div>
 
 
 <!-- Fab -->
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" mode="ios">
   <ion-fab-button class="modalButton" id="open-modal">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 
-<!-- Modal test -->
-<!-- <ion-button id="open-modal2" expand="block">Open</ion-button>
-  <p>{{ message }}</p>
-  <ion-modal trigger="open-modal2" (willDismiss)="onWillDismiss($event)">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Cancel</ion-button>
-          </ion-buttons>
-          <ion-title>Welcome</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <ion-item>
-          <ion-input label="Enter your name" labelPlacement="stacked" type="text" placeholder="Your name"
-            [(ngModel)]="name"></ion-input>
-        </ion-item>
-      </ion-content>
-    </ng-template>
-  </ion-modal> -->
-
 <!-- Modal -->
-<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+<ion-modal trigger="open-modal">
   <ng-template>
     <ion-header>
       <ion-toolbar>
@@ -87,24 +72,24 @@
     </ion-header>
     <ion-content>
       <ion-input class="inputProducto" shape="round" label="Nombre del Producto" label-placement="floating"
-        fill="outline"></ion-input>
+        fill="outline" [(ngModel)]="product.name" name="name"></ion-input>
       <div class="input-container">
         <ion-input class="inputCantidad" type="number" shape="round" label="Cantidad" label-placement="floating"
-          fill="outline"></ion-input>
+          fill="outline" [(ngModel)]="product.quantity" name="quantity"></ion-input>
       </div>
       <div class="inputCategoria">
         <ion-select interface="popover" shape="round" label="Seleccionar Categoría" label-placement="floating"
-          fill="outline">
-          <ion-select-option value="verdura">Verdura</ion-select-option>
-          <ion-select-option value="fruta">Fruta</ion-select-option>
-          <ion-select-option value="carnes">Carnes</ion-select-option>
-          <ion-select-option value="lacteos">Lacteos</ion-select-option>
-          <ion-select-option value="dulces">Dulces</ion-select-option>
-          <ion-select-option value="liquidos">Liquidos</ion-select-option>
-          <ion-select-option value="otros">Otros</ion-select-option>
+          fill="outline" [(ngModel)]="product.category" name="category">
+          <ion-select-option value="Verdura">Verdura</ion-select-option>
+          <ion-select-option value="Fruta">Fruta</ion-select-option>
+          <ion-select-option value="Carnes">Carnes</ion-select-option>
+          <ion-select-option value="Lacteos">Lacteos</ion-select-option>
+          <ion-select-option value="Dulces">Dulces</ion-select-option>
+          <ion-select-option value="Liquidos">Liquidos</ion-select-option>
+          <ion-select-option value="Otros">Otros</ion-select-option>
         </ion-select>
       </div>
-      <ion-button shape="round" class="agregarButton" (click)="agregarProducto()">Agregar</ion-button>
+      <ion-button shape="round" class="agregarButton" (click)="addProducts()">Agregar</ion-button>
     </ion-content>
   </ng-template>
 </ion-modal>
